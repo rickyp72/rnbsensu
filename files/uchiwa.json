@@ -1,0 +1,16 @@
+{
+  "sensu": [
+{
+      "name": "RnBhome",
+      "host": "192.168.33.11",
+      "port": 4567,
+      "insecure": true,
+      "timeout": 10
+    }
+],
+  "uchiwa": {
+    "host": "0.0.0.0",
+    "port": 3000,
+    "refresh": 10
+  }
+}

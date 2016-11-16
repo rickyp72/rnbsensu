@@ -1,0 +1,11 @@
+{
+  "checks": {
+    "mac_check_disk": {
+      "command": "/usr/local/Cellar/nagios-plugins/2.0.3/sbin/check_disk -w 25% -c 10%",
+      "subscribers": [
+        "MACS"
+      ],
+      "interval": 5
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "client": {
+    "address": "192.168.33.11",
+    "subscriptions": [
+      "ALL"
+    ],
+    "name": "default-ubuntu-1404",
+    "platform": "ubuntu",
+    "platform_version": "14.04",
+    "platform_family": "debian",
+    "scheme_prefix": "sensu.default."
+  }
+}

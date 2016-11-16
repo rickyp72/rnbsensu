@@ -1,0 +1,23 @@
+{
+  "transport": {
+    "reconnect_on_error": true,
+    "name": "rabbitmq"
+  },
+  "rabbitmq": {
+      "host": "192.168.33.11",
+      "vhost": "/sensu",
+      "user": "sensu",
+      "password": "monitor"
+  },
+  "client": {
+    "address": "192.168.33.12",
+    "subscriptions": [
+      "ALL"
+    ],
+    "name": "ossec",
+    "platform": "ubuntu",
+    "platform_version": "14.04",
+    "platform_family": "debian",
+    "scheme_prefix": "sensu.default."
+  }
+}

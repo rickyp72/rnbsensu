@@ -1,0 +1,11 @@
+{
+  "checks": {
+    "check_file": {
+      "command": "/etc/sensu/plugins/check_file.sh",
+      "subscribers": [
+        "ALL"
+      ],
+      "interval": 5
+    }
+  }
+}

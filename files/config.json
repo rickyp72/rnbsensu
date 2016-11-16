@@ -1,0 +1,23 @@
+{
+  "transport": {
+    "reconnect_on_error": true,
+    "name": "rabbitmq"
+  },
+  "rabbitmq": {
+      "host": "192.168.33.11",
+      "port": 5672,
+      "vhost": "/sensu",
+      "user": "sensu",
+      "password": "monitor"
+  },
+  "redis": {
+    "host": "192.168.33.11",
+    "port": 6379,
+    "reconnect_on_error": true
+  },
+  "api": {
+    "host": "127.0.0.1",
+    "bind": "0.0.0.0",
+    "port": 4567
+  }
+}
