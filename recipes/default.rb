@@ -11,6 +11,7 @@ end
 service 'redis-server' do
   supports :status => true
   action [ :enable, :start ]
+  ignore_failure true
 end
 
 apt_package 'rabbitmq-server' do
@@ -21,6 +22,7 @@ end
 service 'rabbitmq-server' do
   supports :status => true
   action [ :enable, :start ]
+  ignore_failure true
 end
 
 execute 'rabbitmq-vhost' do
@@ -54,6 +56,7 @@ end
 service 'apache2' do
   supports :status => true
   action [ :enable, :start ]
+  ignore_failure true
 end
 
 apt_package 'sensu' do
@@ -115,17 +118,20 @@ end
 service 'sensu-server' do
   supports :status => true
   action [ :enable, :start ]
+  ignore_failure true
   notifies :restart, 'service[sensu-api]', :immediately
 end
 service 'sensu-api' do
   supports :status => true
   action [ :enable, :start ]
+  ignore_failure true
   notifies :restart, 'service[sensu-client]', :immediately
 end
 
 service 'sensu-client' do
   supports :status => true
   action [ :enable, :start ]
+  ignore_failure true
 end
 
 apt_package 'redis-server' do
@@ -150,4 +156,5 @@ end
 service 'uchiwa' do
   supports :status => true
   action [ :enable, :start ]
+  ignore_failure true
 end
