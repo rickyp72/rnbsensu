@@ -40,6 +40,7 @@ end
 service 'sensu-client' do
   supports :status => true
   action [ :enable, :start ]
+  ignore_failure true
 end
 
 apt_package 'nagios-plugins' do
