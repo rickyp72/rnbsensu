@@ -4,6 +4,9 @@
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
+apt_package 'redis-server' do
+  action :install
+end
 
 service 'redis-server' do
   supports :status => true
