@@ -11,7 +11,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
-  config.vm.hostname = 'sensu-berkshelf'
+  config.vm.hostname = 'rnbsensu-berkshelf'
 
   # Set the version of chef to install using the vagrant-omnibus plugin
   # NOTE: You will need to install the vagrant-omnibus plugin:
@@ -98,7 +98,7 @@ SCRIPT
     }
 
     chef.run_list = [
-      'recipe[sensu::default]'
+      'recipe[rnbsensu::default]'
     ]
   end
 end

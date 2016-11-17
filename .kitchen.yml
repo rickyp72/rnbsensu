@@ -12,5 +12,5 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[sensu::default]
+      - recipe[rnbsensu::default]
     attributes:
