@@ -4,13 +4,13 @@
     "name": "rabbitmq"
   },
   "rabbitmq": {
-      "host": "192.168.33.11",
+      "host": "192.168.1.20",
       "vhost": "/sensu",
       "user": "sensu",
       "password": "monitor"
   },
   "client": {
-    "address": "192.168.33.12",
+    "address": "192.168.1.30",
     "subscriptions": [
       "ALL"
     ],
