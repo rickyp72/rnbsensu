@@ -4,6 +4,45 @@
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
+
+service 'redis-server' do
+  supports :status => true
+  action [ :enable, :start ]
+end
+
+apt_package 'rabbitmq-server' do
+  action :install
+  options "--force-yes"
+  notifies :run, 'execute[rabbitmq-vhost]', :immediately
+end
+service 'rabbitmq-server' do
+  supports :status => true
+  action [ :enable, :start ]
+end
+
+execute 'rabbitmq-vhost' do
+  command 'rabbitmqctl add_vhost /sensu'
+  action :nothing
+  notifies :run, 'execute[rabbit-user]', :immediately
+end
+
+execute 'rabbit-user' do
+  command 'rabbitmqctl add_user sensu monitor'
+  action :nothing
+  notifies :run, 'execute[rabbit-permissions]', :immediately
+end
+
+execute 'rabbit-permissions' do
+  command 'rabbitmqctl set_permissions -p /sensu sensu ".*" ".*" ".*"'
+  action :nothing
+  notifies :run, 'execute[add-rabbit-web-ui]', :immediately
+end
+
+execute 'add-rabbit-web-ui' do
+  command 'rabbitmq-plugins enable rabbitmq_management'
+  action :nothing
+end
+
 apt_package 'apache2' do
   action :install
   options "--force-yes"
@@ -90,43 +129,7 @@ apt_package 'redis-server' do
   action :install
   options "--force-yes"
 end
-service 'redis-server' do
-  supports :status => true
-  action [ :enable, :start ]
-end
 
-apt_package 'rabbitmq-server' do
-  action :install
-  options "--force-yes"
-  notifies :run, 'execute[rabbitmq-vhost]', :immediately
-end
-service 'rabbitmq-server' do
-  supports :status => true
-  action [ :enable, :start ]
-end
-
-execute 'rabbitmq-vhost' do
-  command 'rabbitmqctl add_vhost /sensu'
-  action :nothing
-  notifies :run, 'execute[rabbit-user]', :immediately
-end
-
-execute 'rabbit-user' do
-  command 'rabbitmqctl add_user sensu monitor'
-  action :nothing
-  notifies :run, 'execute[rabbit-permissions]', :immediately
-end
-
-execute 'rabbit-permissions' do
-  command 'rabbitmqctl set_permissions -p /sensu sensu ".*" ".*" ".*"'
-  action :nothing
-  notifies :run, 'execute[add-rabbit-web-ui]', :immediately
-end
-
-execute 'add-rabbit-web-ui' do
-  command 'rabbitmq-plugins enable rabbitmq_management'
-  action :nothing
-end
 
 
 apt_package 'uchiwa' do
