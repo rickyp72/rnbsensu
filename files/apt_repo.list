@@ -1,1 +1,1 @@
-deb http://192.168.33.10/ubuntu1404/debs ./
+deb http://rnb-repo.home/ubuntu1404/debs ./
