@@ -1,7 +1,7 @@
 {
   "checks": {
     "check_disk": {
-      "command": "/usr/lib/nagios/plugins/check_disk -w 25% -c 10%",
+      "command": "/usr/lib/nagios/plugins/check_disk -w 25% -c 10% -A -i .gvfs",
       "subscribers": [
         "ALL"
       ],
