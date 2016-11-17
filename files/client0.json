@@ -10,11 +10,11 @@
       "password": "monitor"
   },
   "client": {
-    "address": "192.168.1.30",
+    "address": "1.1.1.1",
     "subscriptions": [
       "ALL"
     ],
-    "name": "ossec",
+    "name": "xxxxx",
     "platform": "ubuntu",
     "platform_version": "14.04",
     "platform_family": "debian",
