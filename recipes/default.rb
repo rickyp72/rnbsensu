@@ -4,6 +4,13 @@
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
+
+ip = node['network']['interfaces']['eth1']['addresses'].detect{|k,v| v['family'] == "inet" }.first
+
+# ip = node['network']['interfaces']['enp0s8']['addresses'].detect{|k,v| v['family'] == "inet" }.first
+
+
+
 cookbook_file '/etc/apt/sources.list.d/apt_repo.list' do
   source 'apt_repo.list'
   owner 'root'
@@ -119,11 +126,14 @@ cookbook_file '/etc/sensu/conf.d/mac_check_disk.json' do
   notifies :restart, 'service[sensu-server]', :immediately
 end
 
-cookbook_file '/etc/sensu/conf.d/client.json' do
-  source 'client.json'
+template '/etc/sensu/conf.d/client.json' do
+  source 'client.json.erb'
   owner 'root'
   group 'root'
   mode 00644
+  variables({
+          "client_ip" => ip
+         })
   notifies :restart, 'service[sensu-client]', :immediately
 end
 
@@ -169,4 +179,8 @@ service 'uchiwa' do
   supports :status => true
   action [ :enable, :start ]
   ignore_failure true
+end
+
+gem_package 'sensu-plugins-disk-checks' do
+  version '0.0.1'
 end

@@ -3,7 +3,8 @@ apt_package 'sensu' do
   options "--force-yes"
 end
 
-
+# ip = node['network']['interfaces']['enp0s8']['addresses'].detect{|k,v| v['family'] == "inet" }.first
+ip = node['network']['interfaces']['eth1']['addresses'].detect{|k,v| v['family'] == "inet" }.first
 
 # cookbook_file '/etc/sensu/conf.d/client.json' do
 #   source 'client.json'
@@ -29,11 +30,14 @@ end
 #   notifies :restart, 'service[sensu-client]', :immediately
 # end
 
-cookbook_file '/etc/sensu/config.json' do
-  source 'client0.json'
+template '/etc/sensu/config.json' do
+  source 'client0.json.erb'
   owner 'root'
   group 'root'
   mode 00644
+  variables({
+          "client_ip" => ip
+         })
   notifies :restart, 'service[sensu-client]', :immediately
 end
 
