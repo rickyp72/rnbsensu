@@ -2,7 +2,7 @@
   "sensu": [
 {
       "name": "RnBhome",
-      "host": "192.168.33.11",
+      "host": "localhost",
       "port": 4567,
       "insecure": true,
       "timeout": 10

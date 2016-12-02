@@ -1,0 +1,12 @@
+{
+  "handlers": {
+    "handler_graphite": {
+      "type": "tcp",
+      "timeout": 30,
+      "socket": {
+        "host": "localhost",
+        "port": 2003
+      }
+    }
+  }
+}

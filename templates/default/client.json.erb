@@ -1,0 +1,13 @@
+{
+  "client": {
+    "address": "<%= @client_ip %>",
+    "subscriptions": [
+      "ALL"
+    ],
+    "name": "<%= node[:hostname].split('.').first %>",
+    "platform": "ubuntu",
+    "platform_version": "14.04",
+    "platform_family": "debian",
+    "scheme_prefix": "sensu.default."
+  }
+}

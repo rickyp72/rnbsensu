@@ -20,17 +20,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
 
   #### NOTE: ENABLE THIS ON FIRST RUN - THEN DISABLE
-  # if Vagrant.has_plugin?("vagrant-omnibus")
-  #   config.omnibus.chef_version = 'latest'
-  # end
+  if Vagrant.has_plugin?("vagrant-omnibus")
+    config.omnibus.chef_version = 'latest'
+  end
 
   # Every Vagrant virtual environment requires a box to build off of.
   # If this value is a shorthand to a box in Vagrant Cloud then
   # config.vm.box_url doesn't need to be specified.
-  config.vm.box = 'bento/ubuntu-14.04'
+  config.vm.box = 'bento/ubuntu-16.04'
   config.vm.network "private_network", ip: "192.168.33.11"
   config.vm.network "forwarded_port", guest: 15672, host: 15672
   config.vm.network "forwarded_port", guest: 3000, host: 3000
+  config.vm.network "forwarded_port", guest: 80, host: 8880
 
   # Assign this VM to a host-only network IP, allowing you to access it
   # via the IP. Host-only networks can talk to the host machine as well as
@@ -79,8 +80,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.berkshelf.except = []
   $script = <<SCRIPT
       echo I am provisioning...
-      echo 'deb http://192.168.33.10/ubuntu1404/debs ./' > /etc/apt/sources.list
-      apt-get update
+      # echo 'deb http://192.168.33.10/ubuntu1404/debs ./' > /etc/apt/sources.list
+      # apt-get update
       # wget 'http://192.168.33.10/debs/chef_12.16.42-1_amd64.deb'
       # dpkg -i chef_12.16.42-1_amd64.deb
 SCRIPT

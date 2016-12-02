@@ -5,12 +5,14 @@
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
 
-ip = node['network']['interfaces']['eth1']['addresses'].detect{|k,v| v['family'] == "inet" }.first
+# ip = node['network']['interfaces']['eth1']['addresses'].detect{|k,v| v['family'] == "inet" }.first
 
-# ip = node['network']['interfaces']['enp0s8']['addresses'].detect{|k,v| v['family'] == "inet" }.first
+ip = node['network']['interfaces']['enp0s8']['addresses'].detect{|k,v| v['family'] == "inet" }.first
 
-
-
+apt_package ['ruby', "ruby-dev", "build-essential"] do
+  action :install
+end
+#
 cookbook_file '/etc/apt/sources.list.d/apt_repo.list' do
   source 'apt_repo.list'
   owner 'root'
@@ -25,6 +27,7 @@ end
 
 apt_package 'redis-server' do
   action :install
+  options "--force-yes"
 end
 
 service 'redis-server' do
@@ -88,11 +91,16 @@ apt_package 'nagios-plugins' do
   options "--force-yes"
 end
 
-cookbook_file '/etc/sensu/config.json' do
-  source 'config.json'
+# cookbook_file '/etc/sensu/config.json' do
+#   source 'config.json'
+template '/etc/sensu/config.json' do
+  source 'config.json.erb'
   owner 'root'
   group 'root'
   mode 00644
+  variables({
+          "client_ip" => ip
+         })
   notifies :restart, 'service[sensu-server]', :immediately
 end
 
@@ -181,6 +189,10 @@ service 'uchiwa' do
   ignore_failure true
 end
 
-gem_package 'sensu-plugins-disk-checks' do
-  version '0.0.1'
+gem_package 'rest-client' do
+  action :install
 end
+
+# gem_package 'sensu-check-rabbitmq-alive' do
+#   version '2.0.0'
+# end

@@ -3,34 +3,12 @@ apt_package 'sensu' do
   options "--force-yes"
 end
 
+# ip = node['network']['interfaces']['wlp2s0']['addresses'].detect{|k,v| v['family'] == "inet" }.first
+# ip = node['network']['interfaces']['eth1']['addresses'].detect{|k,v| v['family'] == "inet" }.first
 # ip = node['network']['interfaces']['enp0s8']['addresses'].detect{|k,v| v['family'] == "inet" }.first
 ip = node['network']['interfaces']['eth1']['addresses'].detect{|k,v| v['family'] == "inet" }.first
 
-# cookbook_file '/etc/sensu/conf.d/client.json' do
-#   source 'client.json'
-#   owner 'root'
-#   group 'root'
-#   mode 00644
-#   notifies :restart, 'service[sensu-client]', :immediately
-# end
-
-# cookbook_file '/etc/sensu/conf.d/transport.json' do
-#   source 'transport.json'
-#   owner 'root'
-#   group 'root'
-#   mode 00644
-#   notifies :restart, 'service[sensu-client]', :immediately
-# end
-#
-# cookbook_file '/etc/sensu/conf.d/rabbitmq.json' do
-#   source 'rabbitmq.json'
-#   owner 'root'
-#   group 'root'
-#   mode 00644
-#   notifies :restart, 'service[sensu-client]', :immediately
-# end
-
-template '/etc/sensu/config.json' do
+template '/etc/sensu/conf.d/client.json' do
   source 'client0.json.erb'
   owner 'root'
   group 'root'
