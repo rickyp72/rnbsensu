@@ -8,10 +8,6 @@
 # ip = node['network']['interfaces']['eth1']['addresses'].detect{|k,v| v['family'] == "inet" }.first
 
 ip = node['network']['interfaces']['enp0s8']['addresses'].detect{|k,v| v['family'] == "inet" }.first
-
-apt_package ['ruby', "ruby-dev", "build-essential"] do
-  action :install
-end
 #
 cookbook_file '/etc/apt/sources.list.d/apt_repo.list' do
   source 'apt_repo.list'
@@ -20,9 +16,28 @@ cookbook_file '/etc/apt/sources.list.d/apt_repo.list' do
   mode 00644
 end
 
+cookbook_file '/etc/apt/sources.list' do
+  source 'sources.list'
+  owner 'root'
+  group 'root'
+  mode 00644
+end
+
 execute 'update_apt' do
   command 'apt-get update'
   action :run
+end
+
+apt_package 'build-essential' do
+  action :install
+end
+
+apt_package 'ruby-dev' do
+  action :install
+end
+
+apt_package 'ruby' do
+  action :install
 end
 
 apt_package 'redis-server' do

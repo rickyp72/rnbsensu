@@ -20,9 +20,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
 
   #### NOTE: ENABLE THIS ON FIRST RUN - THEN DISABLE
-  if Vagrant.has_plugin?("vagrant-omnibus")
-    config.omnibus.chef_version = 'latest'
-  end
+  # if Vagrant.has_plugin?("vagrant-omnibus")
+  #   config.omnibus.chef_version = 'latest'
+  # end
 
   # Every Vagrant virtual environment requires a box to build off of.
   # If this value is a shorthand to a box in Vagrant Cloud then
