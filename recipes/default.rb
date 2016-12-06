@@ -125,6 +125,15 @@ cookbook_file '/etc/sensu/plugins/check_file.sh' do
   group 'root'
   mode 00755
 end
+
+directory '/etc/sensu/conf.d/checks' do
+  owner 'root'
+  group 'root'
+  mode 00755
+  recursive true
+  action :create
+end
+
 cookbook_file '/etc/sensu/conf.d/check_file.json' do
   source 'check_file.json'
   owner 'root'
@@ -138,6 +147,30 @@ cookbook_file '/etc/sensu/conf.d/check_disk.json' do
   owner 'root'
   group 'root'
   mode 00644
+  notifies :restart, 'service[sensu-server]', :immediately
+end
+
+cookbook_file '/etc/sensu/conf.d/checks/load_check_15_min.json' do
+  source 'server/checks/load_check_15_min.json'
+  owner 'root'
+  group 'root'
+  mode 00644
+  notifies :restart, 'service[sensu-server]', :immediately
+end
+
+cookbook_file '/etc/sensu/handlers/metric_to_file.sh' do
+  source 'server/handlers/metric_to_file.sh'
+  owner 'root'
+  group 'root'
+  mode 00755
+  notifies :restart, 'service[sensu-server]', :immediately
+end
+
+cookbook_file '/etc/sensu/handlers/JSON.sh' do
+  source 'server/handlers/JSON.sh'
+  owner 'root'
+  group 'root'
+  mode 00755
   notifies :restart, 'service[sensu-server]', :immediately
 end
 

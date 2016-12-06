@@ -36,3 +36,35 @@ cookbook_file '/etc/sensu/plugins/check_file.sh' do
   group 'root'
   mode 00755
 end
+
+directory '/etc/sensu/conf.d/checks' do
+  owner 'root'
+  group 'root'
+  mode 00755
+  recursive true
+  action :create
+end
+
+cookbook_file '/etc/sensu/conf.d/checks/load_check_15_min.json' do
+  source 'client/checks/load_check_15_min.json'
+  owner 'root'
+  group 'root'
+  mode 00644
+  notifies :restart, 'service[sensu-client]', :immediately
+end
+
+cookbook_file '/etc/sensu/handlers/JSON.sh' do
+  source 'client/handlers/JSON.sh'
+  owner 'root'
+  group 'root'
+  mode 00755
+  notifies :restart, 'service[sensu-client]', :immediately
+end
+
+cookbook_file '/etc/sensu/handlers/metric_to_file.sh' do
+  source 'client/handlers/metric_to_file.sh'
+  owner 'root'
+  group 'root'
+  mode 00755
+  notifies :restart, 'service[sensu-client]', :immediately
+end

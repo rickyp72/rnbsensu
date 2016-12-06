@@ -1,0 +1,11 @@
+{
+  "check": {
+    "load_check_15_min": {
+      "command": "uptime | awk '{ print $(NF) }'",
+      "subscribers": [ "ALL" ],
+      "interval": 60,
+      "type": "metric",
+      "handler": "metric_to_file"
+    }
+  }
+}
