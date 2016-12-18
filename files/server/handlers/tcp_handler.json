@@ -2,7 +2,7 @@
   "handlers": {
     "tcp_handler": {
       "type": "tcp",
-      "mutator": "mutator_pretty.json"
+      "mutator": "mutator_pretty.json",
       "socket": {
         "host": "127.0.0.1",
         "port": 6000,
