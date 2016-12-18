@@ -5,7 +5,8 @@
       "subscribers": [
         "ALL"
       ],
-      "interval": 5
+      "interval": 5,
+      "handler": "tcp_handler"
     }
   }
 }

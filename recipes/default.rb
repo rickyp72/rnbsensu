@@ -174,6 +174,14 @@ cookbook_file '/etc/sensu/handlers/JSON.sh' do
   notifies :restart, 'service[sensu-server]', :immediately
 end
 
+cookbook_file '/etc/sensu/conf.d/tcp_handler.json' do
+  source 'server/handlers/tcp_handler.json'
+  owner 'root'
+  group 'root'
+  mode 00755
+  notifies :restart, 'service[sensu-server]', :immediately
+end
+
 cookbook_file '/etc/sensu/conf.d/mac_check_disk.json' do
   source 'mac_check_disk.json'
   owner 'root'
@@ -193,6 +201,30 @@ template '/etc/sensu/conf.d/client.json' do
   notifies :restart, 'service[sensu-client]', :immediately
 end
 
+cookbook_file '/etc/sensu/conf.d/filter_production.json' do
+  source 'filter_production.json'
+  owner 'root'
+  group 'root'
+  mode 00755
+  notifies :restart, 'service[sensu-server]', :immediately
+end
+
+cookbook_file '/etc/sensu/mutators/prettymutator.rb' do
+  source 'server/mutators/prettymutator.rb'
+  owner 'root'
+  group 'root'
+  mode 00755
+end
+
+cookbook_file '/etc/sensu/mutators/mutator_pretty.json' do
+  source 'server/mutators/mutator_pretty.json'
+  owner 'root'
+  group 'root'
+  mode 00755
+  notifies :restart, 'service[sensu-server]', :immediately
+end
+
+#################################### end sensu configs
 service 'sensu-server' do
   supports :status => true
   action [ :enable, :start ]

@@ -1,0 +1,7 @@
+{
+  "mutators": {
+    "mutator_pretty": {
+      "command": "/etc/sensu/mutators/prettymutator.rb"
+    }
+  }
+}
