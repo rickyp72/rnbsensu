@@ -209,7 +209,7 @@ cookbook_file '/etc/sensu/conf.d/filter_production.json' do
   notifies :restart, 'service[sensu-server]', :immediately
 end
 
-cookbook_file '/etc/sensu/mutators/prettymutator.rb' do
+cookbook_file '/etc/sensu/conf.d/prettymutator.rb' do
   source 'server/mutators/prettymutator.rb'
   owner 'root'
   group 'root'
