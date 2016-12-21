@@ -174,8 +174,8 @@ cookbook_file '/etc/sensu/handlers/JSON.sh' do
   notifies :restart, 'service[sensu-server]', :immediately
 end
 
-cookbook_file '/etc/sensu/conf.d/tcp_handler.json' do
-  source 'server/handlers/tcp_handler.json'
+cookbook_file '/etc/sensu/conf.d/handler_tcp.json' do
+  source 'server/handlers/handler_tcp.json'
   owner 'root'
   group 'root'
   mode 00755

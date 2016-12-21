@@ -1,0 +1,11 @@
+{
+  "handlers": {
+    "handler_tcp": {
+      "type": "tcp",
+      "socket": {
+        "host": "127.0.0.1",
+        "port": 6000
+      }
+    }
+  }
+}

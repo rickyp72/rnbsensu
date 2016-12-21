@@ -5,7 +5,9 @@
       "subscribers": [
         "Production"
       ],
-      "interval": 5
+      "interval": 5,
+      "handler": "handler_tcp"
     }
   }
 }
+  
