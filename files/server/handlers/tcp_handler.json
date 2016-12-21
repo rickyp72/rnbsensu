@@ -6,7 +6,7 @@
       "socket": {
         "host": "127.0.0.1",
         "port": 6000,
-        "filter": "filter_production"
+        /*"filter": "filter_production"*/
       }
     }
   }

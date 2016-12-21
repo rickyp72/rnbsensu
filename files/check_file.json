@@ -3,10 +3,9 @@
     "check_file": {
       "command": "/etc/sensu/plugins/check_file.sh",
       "subscribers": [
-        "ALL"
+        "Production"
       ],
-      "interval": 5,
-      "handler": "tcp_handler"
+      "interval": 5
     }
   }
 }
